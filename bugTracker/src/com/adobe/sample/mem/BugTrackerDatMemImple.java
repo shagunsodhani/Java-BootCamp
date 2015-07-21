@@ -30,8 +30,8 @@ public class BugTrackerDatMemImple implements BugTrackerDao {
 	public void raiseTicket(Ticket ticket) {
 		for (int i = 0; i < tickets.length; i++) {
 			if(tickets[i] == null){
-				tickets[i].setId(i+1);
 				tickets[i] = ticket;
+				tickets[i].setId(i+1);
 				break;
 			}
 		}
@@ -74,10 +74,16 @@ public class BugTrackerDatMemImple implements BugTrackerDao {
 	@Override
 	public Ticket[] getOpenTickets() {
 		int count = 0;
-		Ticket [] tic = new Ticket[10];
-		for (int i = 0; i< employees.length; i++){
+		for (int i = 0; i< tickets.length; i++){
 			if(tickets[i] != null && tickets[i].getResolvedBy() == null){
-				tic[count++] = tickets[i] ;
+				count++ ;
+			}
+		}
+		Ticket [] tic = new Ticket[count];
+		int j = 0;
+		for (int i = 0; i< tickets.length; i++){
+			if(tickets[i] != null && tickets[i].getResolvedBy() == null){
+				tic[j++] = tickets[i] ;
 			}
 		}
 		return tic;
@@ -89,13 +95,32 @@ public class BugTrackerDatMemImple implements BugTrackerDao {
 	@Override
 	public Ticket[] getResolvedTickets() {
 		int count = 0;
-		Ticket [] tic = new Ticket[10];
-		for (int i = 0; i< employees.length; i++){
+		int i;
+		for (i = 0; i< tickets.length; i++){
 			if(tickets[i] != null && tickets[i].getResolvedBy() == null){
-				tic[count++] = tickets[i] ;
+				count++;
+			}
+		}
+		Ticket [] tic = new Ticket[count];
+		int j = 0;
+		for(i = 0; i< tickets.length; i++){
+			if(tickets[i] != null && tickets[i].getResolvedBy() == null){
+				tic[j++] = tickets[i] ;
 			}
 		}
 		return tic;
+	}
+
+	@Override
+	public Ticket getTicket(int id) {
+		Ticket ticket = null;
+		for (Ticket t : tickets) {
+			if(t.getId() == id){
+				ticket = t;
+				break;
+			}
+		}
+		return ticket;
 	}
 
 }

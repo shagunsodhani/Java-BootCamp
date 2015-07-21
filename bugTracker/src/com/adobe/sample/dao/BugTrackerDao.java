@@ -14,4 +14,6 @@ public interface BugTrackerDao {
 	
 	Ticket[] getResolvedTickets();
 
+	Ticket getTicket(int id);
+
 }
