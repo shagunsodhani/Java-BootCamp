@@ -3,14 +3,19 @@
  */
 package com.adobe.entity;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
 /**
  * @author Shagun Sodhani
  *
  */
-public class Book implements Comparable<Book> {
+public class Book implements Comparable<Book>, Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2792028658852543434L;
 	private String title;
 	private double price;
 	
